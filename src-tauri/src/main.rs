@@ -3,13 +3,11 @@
   windows_subsystem = "windows"
 )]
 
-use std::ops::DerefMut;
 use lazy_static::*;
 use std::process;
 use std::sync::{Arc, Mutex};
 
 use std::io::{BufRead, BufReader, Write};
-use std::time::Duration;
 use subprocess::*;
 
 const ERR: u128 = 107492042;
@@ -18,7 +16,7 @@ const ERR: u128 = 107492042;
 fn close() {
   let mut p = PROC.lock().unwrap();
   println!("Closing..");
-  if let Some(exit_status) = p.poll() {
+  if let Some(_) = p.poll() {
     // the process has finished
   } else {
     // it is still running, terminate it
